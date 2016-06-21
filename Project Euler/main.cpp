@@ -56,10 +56,29 @@ void EvenValueFibonacci(uint32_t max)
 	std::cout << result << std::endl;
 }
 
+void LargestPrimeFactor(uint64_t number)
+{
+	uint64_t temp = number;
+
+	for (uint64_t i = 2; i < temp; i++)
+	{
+		if (temp % i == 0)
+		{
+			std::cout << i << std::endl;
+			temp /= i;
+		}
+	}
+
+	if (temp > 1)
+		std::cout << temp;
+}
+
 int main()
 {
 	//MultiplesOf3_And_5(1000);
-	EvenValueFibonacci(4'000'000);
+	//EvenValueFibonacci(4'000'000);
+	LargestPrimeFactor(600851475143);
+
 
 	int k;
 	std::cin >> k;
