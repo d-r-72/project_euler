@@ -191,6 +191,36 @@ void SumSquareDifference(int natNums)
 	std::cout << (SquareOfSum - SumOfSquare) << std::endl;
 }
 
+void TenThousandAndOnePrime()
+{
+	int counter = 0;
+	int iter = 2;
+	bool done = false;
+	bool addToList;
+
+	while (!done)
+	{
+		addToList = true;
+		
+		for (int i = 2; i < (iter - 1); i++)
+		{
+			if (iter % i == 0)
+				addToList = false;
+		}
+
+		if (addToList)
+		{
+			counter++;
+			if (counter == 10001)
+			{
+				std::cout << "10,001: " << iter << std::endl;
+				done = true;
+			}
+		}
+		iter++;
+	}
+}
+
 int main()
 {
 	//MultiplesOf3_And_5(1000);
@@ -198,7 +228,8 @@ int main()
 	//LargestPrimeFactor(600851475143);
 	//LargestPalindromeProduct(3);
 	//SmallestMultiple();
-	SumSquareDifference(100);
+	//SumSquareDifference(100);
+	TenThousandAndOnePrime();
 
 	int k;
 	std::cin >> k;
