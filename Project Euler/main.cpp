@@ -175,13 +175,30 @@ void SmallestMultiple()
 	}
 }
 
+void SumSquareDifference(int natNums)
+{
+	int SumOfSquare = 0;
+	int SquareOfSum = 0;
+
+	for (int i = 1; i <= natNums; i++)
+	{
+		SumOfSquare += pow(i, 2);
+		SquareOfSum += i;
+	}
+
+	SquareOfSum = pow(SquareOfSum, 2);
+
+	std::cout << (SquareOfSum - SumOfSquare) << std::endl;
+}
+
 int main()
 {
 	//MultiplesOf3_And_5(1000);
 	//EvenValueFibonacci(4'000'000);
 	//LargestPrimeFactor(600851475143);
 	//LargestPalindromeProduct(3);
-	SmallestMultiple();
+	//SmallestMultiple();
+	SumSquareDifference(100);
 
 	int k;
 	std::cin >> k;
