@@ -150,12 +150,38 @@ void LargestPalindromeProduct(int digits)
 	std::cout << "Biggest Palindrome: " << *std::max_element(palindromes.begin(), palindromes.end());
 }
 
+void SmallestMultiple()
+{
+	bool done = false;
+	int counter;
+	while(!done)
+	for (int i = 1; i < INT_MAX; i++)
+	{
+		done = true;
+		counter = 0;
+		for (int j = 1; j <= 20; j++)
+		{
+			if (i % j != 0)
+				done = false;
+			else
+				counter++;
+
+			if (counter == 20)
+			{
+				std::cout << i << std::endl;
+				done = true;
+			}
+		}
+	}
+}
+
 int main()
 {
 	//MultiplesOf3_And_5(1000);
 	//EvenValueFibonacci(4'000'000);
 	//LargestPrimeFactor(600851475143);
-	LargestPalindromeProduct(3);
+	//LargestPalindromeProduct(3);
+	SmallestMultiple();
 
 	int k;
 	std::cin >> k;
