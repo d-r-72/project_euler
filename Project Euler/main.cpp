@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <conio.h>
+#include <algorithm>
 
 void MultiplesOf3_And_5(int num)
 {
@@ -73,12 +75,87 @@ void LargestPrimeFactor(uint64_t number)
 		std::cout << temp;
 }
 
+void LargestPalindromeProduct(int digits)
+{
+	bool done = false;
+	int flipped = 0;
+	int unFlipped;
+	int temp;
+
+	std::vector<int> palindromes, first, second;
+
+	switch (digits)
+	{
+	case 2:
+		for (int i = 10; i <= 99; i++)
+		{
+			for (int j = 99; j >= 10; j--)
+			{
+				unFlipped = 0;
+				flipped = 0;
+				unFlipped = j * i;
+				std::cout << i << " " << j << std::endl;
+				temp = unFlipped;
+
+				while (temp > 0)
+				{
+					flipped = flipped * 10 + (temp % 10);
+					temp = temp / 10;
+				}
+
+				if (flipped == unFlipped)
+				{
+					first.push_back(i);
+					second.push_back(j);
+					palindromes.push_back(flipped);
+				}
+			}
+		}
+		break;
+
+	case 3:
+		for (int i = 100; i <= 999; i++)
+		{
+			for (int j = 999; j >= 1; j--)
+			{
+				unFlipped = 0;
+				flipped = 0;
+				unFlipped = j * i;
+				std::cout << i << " " << j << std::endl;
+				temp = unFlipped;
+
+				while (temp > 0)
+				{
+					flipped = flipped * 10 + (temp % 10);
+					temp = temp / 10;
+				}
+
+				if (flipped == unFlipped)
+				{
+					first.push_back(i);
+					second.push_back(j);
+					palindromes.push_back(flipped);
+				}
+			}
+		}
+		break;
+
+	default:
+		std::cout << digits << " Digits not supported yet!\n";
+		_getch();
+		exit(1);
+		break;
+	}
+
+	std::cout << "Biggest Palindrome: " << *std::max_element(palindromes.begin(), palindromes.end());
+}
+
 int main()
 {
 	//MultiplesOf3_And_5(1000);
 	//EvenValueFibonacci(4'000'000);
-	LargestPrimeFactor(600851475143);
-
+	//LargestPrimeFactor(600851475143);
+	LargestPalindromeProduct(3);
 
 	int k;
 	std::cin >> k;
