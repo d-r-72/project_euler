@@ -273,6 +273,43 @@ void LargestProductInSeries(int adjs)
 	std::cout << prevNum;
 }
 
+void SpecialPythagoreanTriplet()
+{
+	bool done = false;
+
+	const int TOTAL = 1000;
+
+	while (!done)
+	{
+		for (int a = 1; a < TOTAL; a++)
+		{
+			for (int b = a + 1; b < TOTAL; b++)
+			{
+				for (int c = b + 1; c < TOTAL; c++)
+				{
+					if ((pow(a, 2) + pow(b, 2)) == pow(c, 2))
+					{
+						printf("%d^2 + %d^2 = %d^2\n", a, b, c);
+						if ((a + b + c) == TOTAL)
+						{
+							printf("\n\n\n");
+							printf("%d^2 + %d^2 = %d^2\n", a, b, c);
+							printf("%d * %d * %d = %d", a, b, c, (a * b * c));
+							done = true;
+						}
+					}
+					if (done)
+						break;
+				}
+				if (done)
+					break;
+			}
+			if (done)
+				break;
+		}
+	}
+}
+
 int main()
 {
 	//MultiplesOf3_And_5(1000);				1
@@ -282,8 +319,8 @@ int main()
 	//SmallestMultiple();					5
 	//SumSquareDifference(100);				6
 	//TenThousandAndOnePrime();				7
-	LargestProductInSeries(13);				
-
+	//LargestProductInSeries(13);			8
+	SpecialPythagoreanTriplet();
 
 	int k;
 	std::cin >> k;
