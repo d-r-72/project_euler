@@ -1,7 +1,11 @@
 #include <iostream>
+#include <string>
 #include <vector>
 #include <conio.h>
 #include <algorithm>
+#include <fstream>
+#include <iterator>
+#include <Windows.h>
 
 void MultiplesOf3_And_5(int num)
 {
@@ -221,15 +225,65 @@ void TenThousandAndOnePrime()
 	}
 }
 
+void LargestProductInSeries(int adjs)
+{
+	std::string loadedNumber;
+	std::vector<unsigned long long> sums;
+
+	std::ifstream in("ThousandDigitNumber.txt");
+
+	if (in.fail())
+	{
+		std::cerr << "Error opening file\n";
+		_getch();
+		exit(1);
+	}
+
+	std::string line;
+	while (getline(in, line))
+	{
+		loadedNumber.append(line);
+	}
+	
+	bool done = false;
+
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
+		FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_INTENSITY);
+
+	unsigned long long prevNum = 1;
+	unsigned long long nexNum = 1;
+
+	const int MAX_ADJACENTS = adjs;
+	const int DIGITS = loadedNumber.size();
+
+	int temp = 0;
+
+	while (temp <= DIGITS - MAX_ADJACENTS)
+	{
+		for (int i = temp; i < temp + MAX_ADJACENTS; i++)
+			nexNum *= (loadedNumber[i] - '0');
+		
+		if (nexNum > prevNum)
+			prevNum = nexNum;
+		
+		nexNum = 1;
+		temp++;
+	}
+
+	std::cout << prevNum;
+}
+
 int main()
 {
-	//MultiplesOf3_And_5(1000);
-	//EvenValueFibonacci(4'000'000);
-	//LargestPrimeFactor(600851475143);
-	//LargestPalindromeProduct(3);
-	//SmallestMultiple();
-	//SumSquareDifference(100);
-	TenThousandAndOnePrime();
+	//MultiplesOf3_And_5(1000);				1
+	//EvenValueFibonacci(4'000'000);		2
+	//LargestPrimeFactor(600851475143);		3
+	//LargestPalindromeProduct(3);			4
+	//SmallestMultiple();					5
+	//SumSquareDifference(100);				6
+	//TenThousandAndOnePrime();				7
+	LargestProductInSeries(13);				
+
 
 	int k;
 	std::cin >> k;
