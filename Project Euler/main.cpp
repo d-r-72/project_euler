@@ -8,6 +8,7 @@
 #include <list>
 #include <Windows.h>
 #include <ctime>
+#include <cstdlib>
 #include <numeric>
 
 void MultiplesOf3_And_5(int num)
@@ -313,35 +314,27 @@ void SpecialPythagoreanTriplet()
 	}
 }
 
-void SummationOfPrimes(int max)
+void SummationOfPrimes(const int max)
 {	
-	std::vector<unsigned long long> sum;
-	unsigned long long sum_of_elements;
+	//Sieve of Eratosthenes
 
-	for (long number = 2; number < max; number++)
-	{
-		bool add = true;
-		
-		for (long divisor = 2; divisor < number; divisor++)
-		{
-			if (number % divisor == 0)
-			{
-				add = false;
-				break;
-			}
-		}
+	uint64_t sum = 0;
 
-		if (add)
-		{
-			std::cout << number << std::endl;
-			sum.push_back(number);
-		}
-	}
+	std::vector<bool> primes(max);
 
-	std::for_each(sum.begin(), sum.end(), [&](int n) {
-		sum_of_elements += n;
-	});
-	std::cout << sum_of_elements;
+	std::fill(primes.begin(), primes.end(), true);
+
+	for (int i = 2; i < max; i++)
+		if (i <= sqrt(max) && primes[i] == true)
+			for (int j = pow(i, 2); j < max; j++)
+				if (j % i == 0)
+					primes[j] = false;
+
+	for (int i = 2; i < max; i++)
+		if (primes[i] == true)
+			sum += i;
+
+	std::cout << sum << std::endl;
 }
 
 int main()
