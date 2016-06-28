@@ -5,7 +5,11 @@
 #include <algorithm>
 #include <fstream>
 #include <iterator>
+#include <list>
 #include <Windows.h>
+#include <ctime>
+#include <cstdlib>
+#include <numeric>
 
 void MultiplesOf3_And_5(int num)
 {
@@ -310,6 +314,29 @@ void SpecialPythagoreanTriplet()
 	}
 }
 
+void SummationOfPrimes(const int max)
+{	
+	//Sieve of Eratosthenes
+
+	uint64_t sum = 0;
+
+	std::vector<bool> primes(max);
+
+	std::fill(primes.begin(), primes.end(), true);
+
+	for (int i = 2; i < max; i++)
+		if (i <= sqrt(max) && primes[i] == true)
+			for (int j = pow(i, 2); j < max; j++)
+				if (j % i == 0)
+					primes[j] = false;
+
+	for (int i = 2; i < max; i++)
+		if (primes[i] == true)
+			sum += i;
+
+	std::cout << sum << std::endl;
+}
+
 int main()
 {
 	//MultiplesOf3_And_5(1000);				1
@@ -320,7 +347,8 @@ int main()
 	//SumSquareDifference(100);				6
 	//TenThousandAndOnePrime();				7
 	//LargestProductInSeries(13);			8
-	SpecialPythagoreanTriplet();
+	//SpecialPythagoreanTriplet();			9
+	SummationOfPrimes(2000000);
 
 	int k;
 	std::cin >> k;
